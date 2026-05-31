@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ExpertLayout } from '../../components/PortalLayout';
 import { useAuth } from '../../context/AuthContext';
-import { User, ShieldCheck, Mail, Phone, Award, DollarSign, Loader, Sparkles, X, Plus } from 'lucide-react';
+import { User, Phone, Award, DollarSign, Loader, X, Plus } from 'lucide-react';
 import api from '../../services/api';
 
 interface ExpertProfile {

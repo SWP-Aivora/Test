@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ClientLayout } from '../../components/PortalLayout';
 import { useAuth } from '../../context/AuthContext';
-import { Briefcase, Activity, CheckCircle, ShieldAlert, Bot, ArrowRight, Wallet, UserCheck } from 'lucide-react';
+import { Briefcase, Activity, CheckCircle, Bot, ArrowRight, Wallet, UserCheck } from 'lucide-react';
 import api from '../../services/api';
 
 interface JobSummary {
@@ -22,7 +22,7 @@ interface ProjectSummary {
 }
 
 export const ClientDashboard: React.FC = () => {
-  const { user } = useAuth();
+  useAuth();
   const navigate = useNavigate();
   const [jobs, setJobs] = useState<JobSummary[]>([]);
   const [projects, setProjects] = useState<ProjectSummary[]>([]);

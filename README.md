@@ -22,7 +22,7 @@ This repository contains the client-side single-page application (SPA) built wit
 - **Bundler & Core**: Vite + React 18 (TypeScript)
 - **Styling Design System**: Premium custom CSS variables utilizing a curated HSL palette, dark modes, blur backdrops, glassmorphism panel styles, and smooth hover micro-animations.
 - **Iconography**: Lucide React
-- **API Communication**: Axios (pre-configured with local credentials, standard interceptors, and a local proxy to `http://localhost:5176/api`).
+- **API Communication**: Axios configured with dynamic Base URL support (environment variables) and a real-time SignalR real-time client.
 
 ---
 
@@ -44,8 +44,18 @@ npm run dev
 ```
 By default, the application will boot and be accessible at: **`http://localhost:5173`**
 
-### 🐳 API Configuration (Local proxy)
-The application is pre-configured with a Vite proxy to communicate with the local C# ASP.NET Core Backend running at `http://localhost:5176`. Direct your backend endpoints to `/api` inside the client Axios configuration.
+### 🌐 API & Environment Configuration
+The application supports dynamically setting the Backend API Base URL via a `.env` file (configured using Vite environment variables):
+
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+2. Configure `VITE_API_BASE_URL` in `.env` to point to your backend. For production, point to the Render backend:
+   ```env
+   VITE_API_BASE_URL=https://backend-3a0h.onrender.com/api/v1
+   ```
+3. If no environment variable is supplied, the Axios API and SignalR hub automatically fallback to utilizing the local relative Vite dev proxy (`/api/v1` & `/api/v1/chat`).
 
 ---
 

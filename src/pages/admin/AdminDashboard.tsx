@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AdminLayout } from '../../components/PortalLayout';
-import { Scale, ShieldAlert, DollarSign, Calendar, ChevronRight, Loader } from 'lucide-react';
+import { Scale, ShieldAlert, DollarSign, ChevronRight } from 'lucide-react';
 import api from '../../services/api';
 
 interface DisputeSummary {
@@ -111,7 +111,7 @@ export const AdminDashboard: React.FC = () => {
   };
 
   const filteredDisputes = disputes.filter(d => {
-    const isResolved = String(d.status).toUpperCase() === 'RESOLVED' || d.status === 2 || String(d.status) === '2';
+    const isResolved = String(d.status).toUpperCase() === 'RESOLVED' || String(d.status) === '2';
     if (filterStatus === 'ACTIVE') return !isResolved;
     return isResolved;
   });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ExpertLayout } from '../../components/PortalLayout';
-import { Briefcase, Award, TrendingUp, Wallet, ArrowRight, ShieldCheck, User, Star } from 'lucide-react';
+import { Briefcase, Award, TrendingUp, ArrowRight, ShieldCheck, User } from 'lucide-react';
 import api from '../../services/api';
 
 interface ProjectSummary {

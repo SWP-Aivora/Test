@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AdminLayout } from '../../components/PortalLayout';
-import { Scale, ShieldCheck, ShieldAlert, FileText, Send, User, ChevronLeft, DollarSign, Loader } from 'lucide-react';
+import { Scale, FileText, Send, User, ChevronLeft, Loader } from 'lucide-react';
 import api from '../../services/api';
 
 interface Evidence {

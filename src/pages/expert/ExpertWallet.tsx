@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ExpertLayout } from '../../components/PortalLayout';
-import { Wallet, DollarSign, ArrowUpRight, ArrowDownLeft, ShieldAlert, ShieldCheck } from 'lucide-react';
+import { Wallet, DollarSign, ArrowUpRight, ArrowDownLeft, ShieldAlert } from 'lucide-react';
 import api from '../../services/api';
 
 interface Transaction {

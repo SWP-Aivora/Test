@@ -34,9 +34,12 @@ class ChatService {
       return;
     }
 
-    // Set up the Hub connection pointing to our proxied chat endpoint
+    // Set up the Hub connection pointing to our chat endpoint (dynamic base URL)
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+    const hubUrl = apiBaseUrl ? `${apiBaseUrl.replace(/\/$/, '')}/chat` : '/api/v1/chat';
+
     this.connection = new signalR.HubConnectionBuilder()
-      .withUrl('/api/v1/chat', {
+      .withUrl(hubUrl, {
         accessTokenFactory: () => localStorage.getItem('accessToken') || '',
         // Uses native transport negotiation
         skipNegotiation: false,

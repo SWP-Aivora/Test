@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ClientLayout } from '../../components/PortalLayout';
-import { Briefcase, Calendar, DollarSign, Award, Bot, FileText, UserCheck, MessageSquare, AlertCircle, Loader, Shield, Star, Plus } from 'lucide-react';
+import { Calendar, DollarSign, Award, Bot, FileText, MessageSquare, AlertCircle, Loader, Shield, Star, Play } from 'lucide-react';
 import api from '../../services/api';
 
 interface MilestoneSuggestion {
@@ -400,7 +400,7 @@ export const JobDetailView: React.FC = () => {
                           <h5 style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>Proposed Milestone Escrows</h5>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                             {prop.milestones.map((ms, idx) => (
-                              <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', padding: '0.25rem 0', borderBottom: idx < prop.milestones.length - 1 ? '1px dashed var(--border)' : 'none' }}>
+                              <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', padding: '0.25rem 0', borderBottom: idx < (prop.milestones?.length || 0) - 1 ? '1px dashed var(--border)' : 'none' }}>
                                 <span style={{ color: 'var(--text-primary)' }}>
                                   Checkpoint {idx + 1}: {ms.title}
                                 </span>

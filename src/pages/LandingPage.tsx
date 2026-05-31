@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { ArrowRight, Bot, Shield, MessageSquare, Scale, Briefcase, Star, Sparkles } from 'lucide-react';
+import { ArrowRight, Bot, Shield, MessageSquare, Scale, Briefcase, Sparkles } from 'lucide-react';
 import api from '../services/api';
 
 interface JobSummary {

@@ -26,3 +26,6 @@ dist-ssr
 # Redundant E2E scripts and screenshots
 job_create_wizard.png
 scratch_test.js
+
+# Local environment variables
+.env

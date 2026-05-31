@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// Central API Axios instance configured with base proxy path
+// Central API Axios instance configured with environment variable or base proxy fallback
 const api = axios.create({
-  baseURL: '/api/v1',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },

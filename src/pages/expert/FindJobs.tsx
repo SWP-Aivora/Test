@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ExpertLayout } from '../../components/PortalLayout';
-import { Search, Briefcase, DollarSign, Calendar, Sparkles, Filter, Award, Loader, Send, ChevronRight, X, Plus } from 'lucide-react';
+import { Search, Briefcase, Sparkles, Filter, Award, Loader, Send, ChevronRight, X, Plus } from 'lucide-react';
 import api from '../../services/api';
 
 interface JobSummary {
@@ -131,7 +131,6 @@ export const FindJobs: React.FC = () => {
       
       // Auto-prefill bid cost estimation fields based on job limits
       const budgetMax = response.data.budgetMax || 1000;
-      const budgetMin = response.data.budgetMin || 500;
       setBidAmount(budgetMax.toString());
       setCompletionDays((response.data.timelineDays || 10).toString());
 

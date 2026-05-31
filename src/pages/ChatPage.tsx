@@ -4,7 +4,7 @@ import { ClientLayout, ExpertLayout, AdminLayout } from '../components/PortalLay
 import { useAuth } from '../context/AuthContext';
 import chatService from '../services/chatService';
 import type { MessageResponse } from '../services/chatService';
-import { Send, User, MessageSquare, Bot, AlertCircle, Shield, ArrowRight, Loader } from 'lucide-react';
+import { Send, User, MessageSquare, Bot, Loader } from 'lucide-react';
 import api from '../services/api';
 
 interface Conversation {

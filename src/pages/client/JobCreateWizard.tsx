@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ClientLayout } from '../../components/PortalLayout';
-import { Sparkles, Bot, AlertTriangle, HelpCircle, Check, Play, FileText, ArrowLeft, ArrowRight, DollarSign, Calendar, Loader, Plus, X } from 'lucide-react';
+import { Sparkles, Bot, AlertTriangle, HelpCircle, Check, FileText, ArrowLeft, ArrowRight, DollarSign, Calendar, Loader, Plus, X } from 'lucide-react';
 import api from '../../services/api';
 
 interface Category {

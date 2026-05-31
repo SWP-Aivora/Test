@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ExpertLayout } from '../../components/PortalLayout';
-import { ShieldAlert, CheckCircle2, AlertCircle, FileText, Send, MessageSquare, DollarSign, Calendar, Loader, Plus, X } from 'lucide-react';
+import { ShieldAlert, CheckCircle2, AlertCircle, FileText, Send, MessageSquare, Loader } from 'lucide-react';
 import api from '../../services/api';
 
 interface Deliverable {
