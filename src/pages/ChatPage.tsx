@@ -34,7 +34,7 @@ export const ChatPage: React.FC = () => {
   const [inputText, setInputText] = useState('');
   const [sending, setSending] = useState(false);
   const [websocketState, setWebsocketState] = useState<string>('Connecting');
-  const [typing, setTyping] = useState(false);
+  const [typing] = useState(false);
 
   const messageEndRef = useRef<HTMLDivElement>(null);
 

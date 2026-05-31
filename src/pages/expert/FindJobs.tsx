@@ -3,7 +3,6 @@ import { ExpertLayout } from '../../components/PortalLayout';
 import { useToast } from '../../context/ToastContext';
 import { Search, Briefcase, Sparkles, Filter, Award, Loader, Send, ChevronRight, X, Plus } from 'lucide-react';
 import api from '../../services/api';
-import { formatCurrency, formatDate } from '../../utils/formatters';
 
 interface JobSummary { id: string; title: string; categoryName?: string; budgetMin?: number; budgetMax?: number; timelineDays?: number; createdAt: string; skills: string[]; }
 interface JobDetail extends JobSummary { originalDescription: string; finalDescription?: string; budgetType: string; }
@@ -94,6 +93,7 @@ export const FindJobs: React.FC = () => {
 
   const filteredJobs = jobs.filter(j => j.title.toLowerCase().includes(searchQuery.toLowerCase()) || j.skills.some(s => s.toLowerCase().includes(searchQuery.toLowerCase())));
 
+
   return (
     <ExpertLayout>
       <div style={{ display: 'grid', gridTemplateColumns: selectedJob ? '1.2fr 1fr' : '1fr', gap: '2rem', transition: 'grid-template-columns 0.3s ease' }}>
@@ -176,9 +176,9 @@ export const FindJobs: React.FC = () => {
                     <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Budget</div>
                     <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--success)' }}>{selectedJob.budgetMin && selectedJob.budgetMax ? `$${selectedJob.budgetMin} - $${selectedJob.budgetMax}` : 'TBD'}</div>
                   </div>
-                  <div className="glass-card" style={{ padding: '0.75rem 1rem' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Timeline</div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 700' }}>{`${selectedJob.timelineDays || 'TBD'} Days`}</div>
+                  <div className="glass-card" style={{ padding: "0.75rem 1rem" }}>
+                    <div style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>Timeline</div>
+                    <div style={{ fontSize: "1.05rem", fontWeight: 700 }}>{selectedJob && selectedJob.timelineDays ? `${selectedJob.timelineDays} days` : "TBD days"}</div>
                   </div>
                 </div>
 

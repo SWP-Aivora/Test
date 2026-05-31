@@ -4,7 +4,6 @@ import { AdminLayout } from '../../components/PortalLayout';
 import { useToast } from '../../context/ToastContext';
 import { Scale, FileText, Send, User, ChevronLeft, Loader } from 'lucide-react';
 import api from '../../services/api';
-import { getDisputeStatusBadge, getDisputeStatusText } from '../../utils/statusMappers';
 import { formatCurrency, formatDateTime } from '../../utils/formatters';
 
 interface Evidence { id: string; userId: string; userName: string; notes: string; fileUrl?: string; createdAt: string; }

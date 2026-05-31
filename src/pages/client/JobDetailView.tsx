@@ -4,8 +4,8 @@ import { ClientLayout } from '../../components/PortalLayout';
 import { useToast } from '../../context/ToastContext';
 import { Calendar, DollarSign, Award, Bot, FileText, MessageSquare, AlertCircle, Loader, Shield, Star, Play } from 'lucide-react';
 import api from '../../services/api';
-import { getJobStatusBadge, getJobStatusText, getProposalStatusBadge, getProposalStatusText } from '../../utils/statusMappers';
-import { formatCurrency, formatDate } from '../../utils/formatters';
+import { getJobStatusBadge, getJobStatusText } from '../../utils/statusMappers';
+import { formatDate } from '../../utils/formatters';
 
 interface MilestoneSuggestion { title: string; amount: number; dueDays: number; description?: string; }
 interface Proposal { id: string; expertId: string; expertName: string; expertAvatarUrl?: string; coverLetter: string; proposedBudget?: number; proposedTimelineDays?: number; bidAmount?: number; totalBid?: number; completionDays?: number; deliveryDays?: number; status: string; submittedAt?: string; createdAt?: string; milestones?: MilestoneSuggestion[]; }
@@ -96,6 +96,7 @@ export const JobDetailView: React.FC = () => {
   const badge = job ? getJobStatusBadge(job.status) : 'badge-muted';
   const statusText = job ? getJobStatusText(job.status) : '';
 
+
   return (
     <ClientLayout>
       {loading || !job ? (
@@ -170,7 +171,10 @@ export const JobDetailView: React.FC = () => {
                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  {proposals.map(prop => (
+                  {proposals.map(prop => {
+                    const tmDays = prop.proposedTimelineDays ?? prop.completionDays ?? prop.deliveryDays ?? 'N/A';
+                    const timelineValue = `${tmDays}d`;
+                    return (
                     <div key={prop.id} className="glass-panel" style={{ padding: '2rem' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -189,7 +193,7 @@ export const JobDetailView: React.FC = () => {
                           </div>
                           <div style={{ textAlign: 'right' }}>
                             <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Timeline</div>
-                            <div style={{ fontSize: '1.1rem', fontWeight: 600' }}>{`${prop.proposedTimelineDays ?? prop.completionDays ?? prop.deliveryDays ?? 'N/A'}d`}</div>
+                            <div style={{ fontSize: '1.1rem', fontWeight: 600 }}>{timelineValue}</div>
                           </div>
                         </div>
                       </div>
@@ -219,7 +223,8 @@ export const JobDetailView: React.FC = () => {
                         </button>
                       </div>
                     </div>
-                  ))}
+                  );
+                  })}
                 </div>
               )}
             </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, Briefcase, Wallet, MessageSquare,
@@ -112,7 +112,7 @@ const MobileNavHeader: React.FC<{ role: string; badgeClass: string; onMenuClick:
 // CLIENT PORTAL LAYOUT
 // ==========================================
 export const ClientLayout: React.FC<LayoutProps> = ({ children }) => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -183,7 +183,7 @@ export const ClientLayout: React.FC<LayoutProps> = ({ children }) => {
 // EXPERT PORTAL LAYOUT
 // ==========================================
 export const ExpertLayout: React.FC<LayoutProps> = ({ children }) => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -249,7 +249,7 @@ export const ExpertLayout: React.FC<LayoutProps> = ({ children }) => {
 // ADMIN PORTAL LAYOUT
 // ==========================================
 export const AdminLayout: React.FC<LayoutProps> = ({ children }) => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 

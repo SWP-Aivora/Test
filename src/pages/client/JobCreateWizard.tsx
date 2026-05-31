@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ClientLayout } from '../../components/PortalLayout';
 import { useToast } from '../../context/ToastContext';
-import { Sparkles, Bot, AlertTriangle, HelpCircle, Check, FileText, ArrowLeft, ArrowRight, DollarSign, Calendar, Loader, Plus, X, Briefcase } from 'lucide-react';
+import { Sparkles, Bot, AlertTriangle, HelpCircle, Check, FileText, ArrowLeft, ArrowRight, DollarSign, Calendar, Loader, Plus, X } from 'lucide-react';
 import api from '../../services/api';
 
 interface Category { id: string; name: string; }

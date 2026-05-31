@@ -4,7 +4,7 @@ import { ExpertLayout } from '../../components/PortalLayout';
 import { Briefcase, Award, TrendingUp, ArrowRight, ShieldCheck, User } from 'lucide-react';
 import api from '../../services/api';
 import { getProjectStatusBadge, getProjectStatusText, getProposalStatusBadge, getProposalStatusText } from '../../utils/statusMappers';
-import { formatCurrency, formatDate } from '../../utils/formatters';
+import { formatCurrency } from '../../utils/formatters';
 
 interface ProjectSummary { id: string; title: string; clientName: string; status: string; fundedMilestonesCount: number; totalMilestonesCount: number; }
 interface ProposalSummary { id: string; jobId: string; jobTitle: string; bidAmount: number; completionDays: number; status: string; createdAt: string; }
