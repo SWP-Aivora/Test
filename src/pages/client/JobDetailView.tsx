@@ -189,7 +189,7 @@ export const JobDetailView: React.FC = () => {
                           </div>
                           <div style={{ textAlign: 'right' }}>
                             <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Timeline</div>
-                            <div style={{ fontSize: '1.1rem', fontWeight: 600' }}>{prop.proposedTimelineDays ?? prop.completionDays ?? prop.deliveryDays ?? 'N/A'}d</div>
+                            <div style={{ fontSize: '1.1rem', fontWeight: 600' }}>{(prop.proposedTimelineDays ?? prop.completionDays ?? prop.deliveryDays ?? 'N/A') + 'd'}</div>
                           </div>
                         </div>
                       </div>

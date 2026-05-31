@@ -29,7 +29,7 @@ export const ClientWallet: React.FC = () => {
       try {
         const hRes = await api.get('/payments/history', { params: { pageSize: 20 } });
         setTransactions((hRes.data?.items || []).map((item: any) => ({ ...item, type: mapTransactionType(item.type), direction: mapTransactionDirection(item.direction) })));
-      } {
+      } catch {
         setTransactions([{ id: 't-1', amount: 5000, direction: 'IN', type: 'DEMO_DEPOSIT', description: 'Demo wallet initialization', createdAt: new Date(Date.now() - 86400000).toISOString() }]);
       }
     } catch { setTransactions([{ id: 't-1', amount: 5000, direction: 'IN', type: 'DEMO_DEPOSIT', description: 'Demo wallet initialization', createdAt: new Date(Date.now() - 86400000).toISOString() }]); }

@@ -178,7 +178,7 @@ export const FindJobs: React.FC = () => {
                   </div>
                   <div className="glass-card" style={{ padding: '0.75rem 1rem' }}>
                     <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Timeline</div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 700' }}>{selectedJob.timelineDays || 'TBD'} Days</div>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 700' }}>{(selectedJob.timelineDays || 'TBD') + ' Days'}</div>
                   </div>
                 </div>
 
