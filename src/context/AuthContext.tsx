@@ -16,10 +16,12 @@ interface AuthContextType {
   user: UserResponse | null;
   loading: boolean;
   isAuthenticated: boolean;
+  error: string | null;
   login: (email: string, password: string) => Promise<'CLIENT' | 'EXPERT' | 'ADMIN'>;
   register: (fullName: string, email: string, role: 'CLIENT' | 'EXPERT', password: string) => Promise<'CLIENT' | 'EXPERT' | 'ADMIN'>;
   logout: () => void;
   updateUserProfile: (data: { fullName?: string; phone?: string; avatarUrl?: string }) => Promise<void>;
+  clearError: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,6 +29,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Core logout function: wipes storage and disconnects WebSockets
   const logout = () => {
@@ -77,6 +80,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Standard authentication handler
   const login = async (email: string, password: string): Promise<'CLIENT' | 'EXPERT' | 'ADMIN'> => {
     try {
+      setError(null);
       const response = await api.post('/auth/login', { email, password });
       const payload = response.data;
 
@@ -96,6 +100,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       return role as 'CLIENT' | 'EXPERT' | 'ADMIN';
     } catch (err: any) {
+      const msg = err?.message || 'Login failed.';
+      setError(msg);
       throw err;
     }
   };
@@ -103,6 +109,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Registration handler
   const register = async (fullName: string, email: string, role: 'CLIENT' | 'EXPERT', password: string): Promise<'CLIENT' | 'EXPERT' | 'ADMIN'> => {
     try {
+      setError(null);
       const response = await api.post('/auth/register', { fullName, email, role, password });
       const payload = response.data;
 
@@ -119,9 +126,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       return role;
     } catch (err: any) {
+      const msg = err?.message || 'Registration failed.';
+      setError(msg);
       throw err;
     }
   };
+
+  const clearError = () => setError(null);
 
   // Helper to dynamically update profile details on the fly
   const updateUserProfile = async (data: { fullName?: string; phone?: string; avatarUrl?: string }) => {
@@ -139,10 +150,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         user,
         loading,
         isAuthenticated: !!user,
+        error,
         login,
         register,
         logout,
         updateUserProfile,
+        clearError,
       }}
     >
       {children}

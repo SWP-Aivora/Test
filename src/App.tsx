@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ToastProvider } from './context/ToastContext';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 // Core shared portals
 import { LandingPage } from './pages/LandingPage';
@@ -29,39 +31,69 @@ import { DisputeArbitration } from './pages/admin/DisputeArbitration';
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          {/* Public Routing */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          
-          {/* Shared Real-Time Communication Hub */}
-          <Route path="/chat" element={<ChatPage />} />
+      <ToastProvider>
+        <AuthProvider>
+          <Routes>
+            {/* Public Routing */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
-          {/* Client Portal Routing */}
-          <Route path="/client/dashboard" element={<ClientDashboard />} />
-          <Route path="/client/jobs" element={<ClientDashboard />} /> {/* Lists jobs directly in dashboard */}
-          <Route path="/client/jobs/new" element={<JobCreateWizard />} />
-          <Route path="/client/jobs/:id" element={<JobDetailView />} />
-          <Route path="/client/projects/:id" element={<ClientProjectView />} />
-          <Route path="/client/wallet" element={<ClientWallet />} />
+            {/* Shared — requires auth */}
+            <Route path="/chat" element={
+              <ProtectedRoute><ChatPage /></ProtectedRoute>
+            } />
 
-          {/* Expert Portal Routing */}
-          <Route path="/expert/dashboard" element={<ExpertDashboard />} />
-          <Route path="/expert/jobs" element={<FindJobs />} />
-          <Route path="/expert/projects/:id" element={<ExpertProjectView />} />
-          <Route path="/expert/wallet" element={<ExpertWallet />} />
-          <Route path="/expert/profile" element={<ExpertProfileEdit />} />
+            {/* Client Portal — requires CLIENT role */}
+            <Route path="/client/dashboard" element={
+              <ProtectedRoute allowedRole="CLIENT"><ClientDashboard /></ProtectedRoute>
+            } />
+            <Route path="/client/jobs" element={
+              <ProtectedRoute allowedRole="CLIENT"><ClientDashboard /></ProtectedRoute>
+            } />
+            <Route path="/client/jobs/new" element={
+              <ProtectedRoute allowedRole="CLIENT"><JobCreateWizard /></ProtectedRoute>
+            } />
+            <Route path="/client/jobs/:id" element={
+              <ProtectedRoute allowedRole="CLIENT"><JobDetailView /></ProtectedRoute>
+            } />
+            <Route path="/client/projects/:id" element={
+              <ProtectedRoute allowedRole="CLIENT"><ClientProjectView /></ProtectedRoute>
+            } />
+            <Route path="/client/wallet" element={
+              <ProtectedRoute allowedRole="CLIENT"><ClientWallet /></ProtectedRoute>
+            } />
 
-          {/* Admin Panel Routing */}
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/disputes/:id" element={<DisputeArbitration />} />
+            {/* Expert Portal — requires EXPERT role */}
+            <Route path="/expert/dashboard" element={
+              <ProtectedRoute allowedRole="EXPERT"><ExpertDashboard /></ProtectedRoute>
+            } />
+            <Route path="/expert/jobs" element={
+              <ProtectedRoute allowedRole="EXPERT"><FindJobs /></ProtectedRoute>
+            } />
+            <Route path="/expert/projects/:id" element={
+              <ProtectedRoute allowedRole="EXPERT"><ExpertProjectView /></ProtectedRoute>
+            } />
+            <Route path="/expert/wallet" element={
+              <ProtectedRoute allowedRole="EXPERT"><ExpertWallet /></ProtectedRoute>
+            } />
+            <Route path="/expert/profile" element={
+              <ProtectedRoute allowedRole="EXPERT"><ExpertProfileEdit /></ProtectedRoute>
+            } />
 
-          {/* Fallback Guard */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </AuthProvider>
+            {/* Admin Panel — requires ADMIN role */}
+            <Route path="/admin/dashboard" element={
+              <ProtectedRoute allowedRole="ADMIN"><AdminDashboard /></ProtectedRoute>
+            } />
+            <Route path="/admin/disputes/:id" element={
+              <ProtectedRoute allowedRole="ADMIN"><DisputeArbitration /></ProtectedRoute>
+            } />
+
+            {/* Fallback Guard */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </AuthProvider>
+      </ToastProvider>
     </BrowserRouter>
   );
 };
